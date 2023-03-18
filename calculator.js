@@ -2,7 +2,7 @@ const displayedNumber = document.querySelector('.screen-container')
 const numberSigns = Array.from(document.querySelectorAll('button'))
 
 const resetAfterError = () => {
-	if(displayedNumber.textContent === 'ERROR') {
+	if(displayedNumber.style.color === 'red') {
 		displayedNumber.innerHTML = ''
 		displayedNumber.style.color = '#575454'
 	}
@@ -10,7 +10,6 @@ const resetAfterError = () => {
 
 numberSigns.map(button => {
 	button.addEventListener('click', (event) => {
-
 		switch (event.target.innerText) {
 			case 'AC':
 				resetAfterError()
@@ -25,7 +24,13 @@ numberSigns.map(button => {
 			case '=':
 				resetAfterError()
 				try{
-					displayedNumber.textContent = eval(displayedNumber.textContent)
+					const result = eval(displayedNumber.textContent)
+						if(result === Infinity){
+							displayedNumber.textContent = 'cannot divide by 0'
+							displayedNumber.style.color = 'red'
+						} else {
+							displayedNumber.textContent = result
+						}
 				} catch {
 					displayedNumber.style.color = 'red'
 					displayedNumber.textContent = 'ERROR'
@@ -33,7 +38,7 @@ numberSigns.map(button => {
 			break;
 			default:
 				resetAfterError()
-				if(displayedNumber.innerText.toString().length < 13){
+				if(displayedNumber.innerText.toString().length < 17){
 					displayedNumber.textContent += event.target.innerText;
 				}
 			break;
