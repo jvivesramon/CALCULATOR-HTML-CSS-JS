@@ -1,0 +1,125 @@
+body {
+  min-width: 600px;
+  height: 100vh;
+  position: relative;
+  overflow: hidden;
+  background: linear-gradient(rgb(249 233 180), rgb(244 211 130));
+  display: flex;
+  justify-content: center;
+  align-items: center;
+}
+
+.calculator-container {
+  display: block;
+  height: 485px;
+  width: 375px;
+  border-radius: 15px;
+  box-shadow: 0px 0px 20px 5px rgb(146, 99, 39);
+  background: repeating-linear-gradient( 45deg, rgb(101 194 149) 45px, rgb(90 197 143) 5px, #4bb68f 18px, rgb(101 194 149) 53px );
+}
+
+.screen-container-section {
+  display: flex;
+  justify-content: center
+}
+
+.screen-container {
+  display: flex;
+  background-color: rgb(255, 251, 250);
+  justify-content: flex-end;
+  align-items: center;
+  width: 310px;
+  height: 60px;
+  margin-block: 20px;
+  margin-top: 30px;
+  padding: 20px;
+  border-radius: 10px;
+  white-space: nowrap;
+  overflow: scroll;
+  box-shadow: inset 0px 0px 5px 2px;
+  font-family: sans-serif;
+  font-size: 2.5em;
+  color: #575454;
+}
+
+.number-container {
+  padding: 2px;
+  margin-inline: 15px;
+  border-radius: 10px;
+  background-color: rgb(146 255 207);
+  box-shadow: inset 0px 0px 5px 2px;
+}
+
+.display-center {
+  display: flex;
+  justify-content: center;
+  margin: 7px;
+  gap: 7px;
+}
+
+button {
+  border: none;
+  background-color: #f4f6f9;
+  padding: 10px;
+  border-radius: 10%;
+  height: 65px;
+  width: 60px;
+  font-family: sans-serif;
+  font-size: 1.6em;
+  font-weight: bold;
+  color: #706c6c;
+  box-shadow: 0px 0px 8px 2px rgb(79 78 75);
+}
+
+button:active {
+  background-color: rgb(189, 195, 202);
+  color: white;
+}
+
+.erase-button {
+  background-color: rgb(237 106 77);
+  color: white;
+}
+
+.erase-button:active {
+  background-color: rgb(215, 73, 45);
+}
+
+.ac-button {
+  width: 125px;
+  border-radius: 5px;
+  background-color: rgb(72 160 246);
+  color: white;
+}
+
+.ac-button:active {
+  background-color: rgb(52, 137, 221);
+}
+
+.cero-button {
+  width: 125px;
+  border-radius: 5px; 
+}
+
+.equal-button {
+  width: 125px;
+  border-radius: 5px; 
+  background-color: rgb(253, 207, 90);
+  color: white;
+}
+
+.signs-button {
+  color: white;
+  background-color: rgb(50, 57, 67);
+  box-shadow: 0px 0px 10px 1px rgb(53, 55, 58);
+  font-size: 1.8em;
+}
+
+.signs-button:active {
+  background-color: #706c6c;
+}
+
+.multiply-sign {
+  padding: 22px;
+  font-size: 2.2em;
+}
