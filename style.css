@@ -3,7 +3,7 @@ body {
   height: 100vh;
   position: relative;
   overflow: hidden;
-  background: linear-gradient(rgb(249 233 180), rgb(244 211 130));
+  background: linear-gradient(rgb(106 104 101), rgb(26 25 23));
   display: flex;
   justify-content: center;
   align-items: center;
@@ -14,7 +14,7 @@ body {
   height: 485px;
   width: 375px;
   border-radius: 15px;
-  box-shadow: 0px 0px 20px 5px rgb(146, 99, 39);
+  box-shadow: 0px 0px 20px 5px rgb(41 39 36);
   background: repeating-linear-gradient( 45deg, rgb(101 194 149) 45px, rgb(90 197 143) 5px, #4bb68f 18px, rgb(101 194 149) 53px );
 }
 
