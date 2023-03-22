@@ -2,9 +2,41 @@ const displayedNumber = document.querySelector('label')
 const numberSigns = Array.from(document.querySelectorAll('button'))
 
 let displayedNumbersToCheck = ''
+let displayedSignsToOperate = ''
+
+const stopTheDotButton = () => {
+	const valuesOfNumbers = displayedNumbersToCheck.split(' ')
+	const lastNumberValue = Number(valuesOfNumbers.pop())
+	const isInteger = Number.isInteger(lastNumberValue)
+	return isInteger
+}
+
+const getResult = () => {
+	const valuesOfNumbersToOperateWith = displayedNumbersToCheck.split(' ')
+    let resultValue = Number(valuesOfNumbersToOperateWith[0])
+
+	valuesOfNumbersToOperateWith.map((value, index) => {
+	const sign = displayedSignsToOperate[index]
+		switch (sign) {
+		case '+':
+			resultValue = resultValue + Number(valuesOfNumbersToOperateWith[index + 1])
+		break;
+		case '-':
+			resultValue = resultValue - Number(valuesOfNumbersToOperateWith[index + 1])
+		break;
+		case '*':
+			resultValue = resultValue * Number(valuesOfNumbersToOperateWith[index + 1])
+		break;
+		case '/':
+			resultValue = resultValue / Number(valuesOfNumbersToOperateWith[index + 1])
+		break;
+		}
+	})
+	return resultValue.toString()
+}
 
 const lastCharacter = () => displayedNumbersToCheck.slice(-1)
-const isLastCharacterASign = () => isNaN(Number(displayedNumbersToCheck.slice(-1)))
+const isLastCharacterASign = () => displayedNumbersToCheck.slice(-1) === ' '
 const isLessThanScreenLength = () => displayedNumber.innerText.toString().length < 17
 
 const resetClassListAfterError = () => {
@@ -35,15 +67,17 @@ numberSigns.map(button => {
 			break;
 			case '=':
 				try{
-					const result = eval(displayedNumber.textContent).toString()
-						if(result === 'Infinity'){
-							displayedNumber.textContent = 'cannot divide by 0'
-							displayedNumber.classList.remove('screen-container')
-							displayedNumber.classList.add('screen-container-error')
-						} else {
-							displayedNumber.textContent = result
-							displayedNumbersToCheck = result
-						}
+					let result = getResult()
+
+					if(result === 'Infinity'){
+						displayedNumber.textContent = 'cannot divide by 0'
+						displayedNumber.classList.remove('screen-container')
+						displayedNumber.classList.add('screen-container-error')
+					} else {
+						displayedNumber.textContent = result
+						displayedNumbersToCheck = result
+						displayedSignsToOperate = ''
+					}
 				} catch {
 					displayedNumber.classList.remove('screen-container')
 					displayedNumber.classList.add('screen-container-error')
@@ -54,7 +88,8 @@ numberSigns.map(button => {
 				if(isLessThanScreenLength()){
 					if(lastCharacter() !== '+' && !isLastCharacterASign()) {
 						displayedNumber.textContent += event.target.innerText;
-						displayedNumbersToCheck += event.target.innerText;
+						displayedNumbersToCheck += ' '
+						displayedSignsToOperate += event.target.innerText;
 					}
 				}
 			break;
@@ -62,7 +97,8 @@ numberSigns.map(button => {
 				if(isLessThanScreenLength()){
 					if(lastCharacter() !== '-' && !isLastCharacterASign()) {
 						displayedNumber.textContent += event.target.innerText;
-						displayedNumbersToCheck += event.target.innerText;
+						displayedNumbersToCheck += ' '
+						displayedSignsToOperate += event.target.innerText;
 					}
 				}
 			break;
@@ -70,7 +106,8 @@ numberSigns.map(button => {
 				if(isLessThanScreenLength()){
 					if(lastCharacter() !== '*' && !isLastCharacterASign()) {
 						displayedNumber.textContent += event.target.innerText;
-						displayedNumbersToCheck += event.target.innerText;
+						displayedNumbersToCheck += ' '
+						displayedSignsToOperate += event.target.innerText;
 					}
 				}
 			break;
@@ -78,15 +115,18 @@ numberSigns.map(button => {
 				if(isLessThanScreenLength()){
 					if(lastCharacter() !== '/' && !isLastCharacterASign()) {
 						displayedNumber.textContent += event.target.innerText;
-						displayedNumbersToCheck += event.target.innerText;
+						displayedNumbersToCheck += ' '
+						displayedSignsToOperate += event.target.innerText;
 					}
 				}
 			break;
 			case '.':
 				if(isLessThanScreenLength()){
 					if(lastCharacter() !== '.' && !isLastCharacterASign()) {
-						displayedNumber.textContent += event.target.innerText;
-						displayedNumbersToCheck += event.target.innerText;
+						if(stopTheDotButton()) {
+							displayedNumber.textContent += event.target.innerText;
+							displayedNumbersToCheck += event.target.innerText;
+						}
 					}
 				}
 			break;
